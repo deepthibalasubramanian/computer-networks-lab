@@ -1,3 +1,32 @@
+#accepted ans
+
+#DEEPTHI B - 21BCE5601
+
+#get number of inputs from user
+n=int(input())
+temp=0
+
+#get n inputs from user and sum up those
+for i in range(n):
+    hexword=input()
+    temp+=int(hexword,16)
+
+while temp>0xFFFF:
+    carry=temp>>16
+    temp&=0xFFFF
+    temp+=carry
+    
+#take 1's complement of x
+x=(~temp) & 0xFFFF
+#y=x^0xFFFF
+print(format(x,'04X'))
+
+
+
+'''-----------------------------------------------------------------
+my ans
+
+
 #DEEPTHI B - 21BCE5601
 
 #get number of inputs from user
@@ -34,3 +63,4 @@ x=~x
 y=hex(x&0xFFFF)[2:]
 y=y.upper()
 print(y)
+'''

@@ -1,28 +1,47 @@
-#DEEPTHI B-21BCE5601
+# given:
+# IP address
+# net mask
+# to find:
+# network address: first address
+# last address
+# total devices
 
-#get number of inputs from user
-n=int(input())
+# idea: convert all binary values into 8 bit format
+# join them together
+# find subnet mask in binary
+# do AND for first address
+# take 1's complement and OR for last address
 
-temp=0
+valuecalc(hostaddress,binval):
+    
 
-#get n inputs and add them
-for i in range(n):
-    binaryword=input()
-    temp+=int(binaryword,2)
+ipaddress=input()
+array=ipaddress.split('.')
+array2=array[-1].split('/')
+#print(array2)
+array.pop()
+array.extend(array2)
+print(array)
 
-#accept checksum received from sender
-checksumin=int(input(),2)
+# network address
+# decimal to binary
+#bin(n).replace("0b", "")
+array1=[]
+netmask=int(array[-1])
+hostaddress=32-netmask
+for i in array:
+    array1.append(bin(int(i)).replace("0b", ""))
+print(array1)
+if(netmask<9):
+    
+elif (netmask<17):
 
-#add carry to temp, if any
-while temp>255:
-    carry=temp>>8
-    temp&=0xFF
-    temp+=carry
+elif(netmask<25):
+    
+elif(netmask<33):
 
-#take 1's complement of x
-x=(~temp)&0xFF
-
-if(x==checksumin):
-    print("Error free")
 else:
-    print("Error")
+
+
+# total devices
+print("Number of devices: "+str(2**hostaddress))

@@ -28,16 +28,28 @@ array1=[]
 netmask=int(array[-1])
 hostaddress=32-netmask
 totaldevice=2**hostaddress
-
+inputset=''
+array3=array
+array.pop()
 #format(x, '08b')
 for i in array:
     #x=(bin(int(i)).replace("0b", ""))
     y=format(int(i),'08b')
     array1.append(y)
+    inputset=inputset+y
     '''while int(bin(array1[-1]))<128:
         array1[-1]=bin('0'+str(array1[i])).replace('0b', '')'''
 print(array1)
+print(inputset)
+subnet=''
+for i in range(int(netmask)):
+    subnet=subnet+'1'
+for i in range(int(hostaddress)):
+    subnet=subnet+'0'
+print(subnet)
 
+firstaddbin=bin(subnet)&bin(inputset)
+print(int(firstaddbin))
 '''if(netmask<9):
     
 elif (netmask<17):

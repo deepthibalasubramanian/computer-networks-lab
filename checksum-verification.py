@@ -1,148 +1,28 @@
-# given:
-# IP address
-# net mask
-# to find:
-# network address: first address
-# last address
-# total devices
+#DEEPTHI B-21BCE5601
 
-# idea: convert all binary values into 8 bit format
-# join them together
-# find subnet mask in binary
-# do AND for first address
-# take 1's complement and OR for last address
-    
+#get number of inputs from user
+n=int(input())
 
-ipaddress=input()
-array=ipaddress.split('.')
-array2=array[-1].split('/')
-#print(array2)
-array.pop()
-array.extend(array2)
-print(array)
+temp=0
 
-# network address
-# decimal to binary
-#bin(n).replace("0b", "")
-array1=[]
-netmask=int(array[-1])
-hostaddress=32-netmask
-totaldevice=2**hostaddress
-inputset=''
-array3=array
-array.pop()
-#format(x, '08b')
-for i in array:
-    #x=(bin(int(i)).replace("0b", ""))
-    y=format(int(i),'08b')
-    array1.append(y)
-    inputset=inputset+y
-    '''while int(bin(array1[-1]))<128:
-        array1[-1]=bin('0'+str(array1[i])).replace('0b', '')'''
-print(array1)
-print(inputset)
-subnet=''
-for i in range(int(netmask)):
-    subnet=subnet+'1'
-for i in range(int(hostaddress)):
-    subnet=subnet+'0'
-print(subnet)
+#get n inputs and add them
+for i in range(n):
+    binaryword=input()
+    temp+=int(binaryword,2)
 
-firstaddbin=bin(subnet)&bin(inputset)
-print(int(firstaddbin))
-'''if(netmask<9):
-    
-elif (netmask<17):
+#accept checksum received from sender
+checksumin=int(input(),2)
 
-elif(netmask<25):
-    
-elif(netmask<33):
+#add carry to temp, if any
+while temp>255:
+    carry=temp>>8
+    temp&=0xFF
+    temp+=carry
 
-else:'''
+#take 1's complement of x
+x=(~temp)&0xFF
 
-
-# total devices
-print("Number of devices: "+str(totaldevice))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'''# given:
-# IP address
-# net mask
-# to find:
-# network address: first address
-# last address
-# total devices
-
-# idea: convert all binary values into 8 bit format
-# join them together
-# find subnet mask in binary
-# do AND for first address
-# take 1's complement and OR for last address
-    
-
-ipaddress=input()
-array=ipaddress.split('.')
-array2=array[-1].split('/')
-#print(array2)
-array.pop()
-array.extend(array2)
-print(array)
-
-# network address
-# decimal to binary
-#bin(n).replace("0b", "")
-array1=[]
-netmask=int(array[-1])
-hostaddress=32-netmask
-totaldevice=2**hostaddress
-inputset=''
-array3=array
-array.pop()
-#format(x, '08b')
-for i in array:
-    #x=(bin(int(i)).replace("0b", ""))
-    y=format(int(i),'08b')
-    array1.append(y)
-    inputset=inputset+y
-    
-print(array1)
-print(inputset)
-subnet=''
-for i in range(int(netmask)):
-    subnet=subnet+'1'
-for i in range(int(hostaddress)):
-    subnet=subnet+'0'
-print(subnet)
-
-firstaddbin=bin(subnet)&bin(inputset)
-print(int(firstaddbin))
-
-
-# total devices
-print("Number of devices: "+str(totaldevice))'''
+if(x==checksumin):
+    print("Error free")
+else:
+    print("Error")

@@ -14,10 +14,10 @@ array.extend(array2)
 
 numdevices=int(input())
 subnetbits=int(math.log2(numdevices))
-netadd=int(array[-1])+subnetbits
+netadd=32-subnetbits
 output=''
-for i in range(netadd+1):
+for i in range(netadd):
     output+='1'
-for i in range(32-netadd-1):
+for i in range(32-netadd):
     output+='0'
 print(str(int(output[:8],2))+'.'+str(int(output[8:16],2))+'.'+str(int(output[16:24],2))+'.'+str(int(output[24:32],2)))
